@@ -1,0 +1,54 @@
+name: Code Analysis
+
+on:
+  push:
+    branches:
+      - main
+      - copilot
+      - codeium
+      - codewhisperer
+      - gemini
+      - chatgpt
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  analyze:
+    name: SonarQube & DeepCode Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache SonarQube Packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: "https://sonarcloud.io"
+        run: |
+          mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=SEU_PROJETO \
+            -Dsonar.organization=MINHA_ORGANIZACAO \
+            -Dsonar.host.url=$SONAR_HOST_URL \
+            -Dsonar.login=$SONAR_TOKEN
+
+      - name: Run DeepCode Analysis
+        uses: Snyk/actions/deepcode@master
+        env:
+          SNYK_TOKEN: e648e127-726d-4ec5-8bcd-9a6c28c508c8
+        with:
+          args: --severity-threshold=high
