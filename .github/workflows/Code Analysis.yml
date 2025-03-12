@@ -18,7 +18,7 @@ on:
 
 jobs:
   analyze:
-    name: SonarQube & DeepCode Analysis
+    name: SonarQube & Snyk Code Analysis
     runs-on: ubuntu-latest
 
     steps:
@@ -49,9 +49,14 @@ jobs:
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN
 
-      - name: Run DeepCode Analysis
-        uses: Snyk/actions/deepcode@master
+      - name: Install Snyk CLI
+        run: |
+          curl -Lo snyk https://github.com/snyk/snyk/releases/latest/download/snyk-linux
+          chmod +x snyk
+          mv snyk /usr/local/bin/
+
+      - name: Run Snyk Code Analysis
         env:
           SNYK_TOKEN: e648e127-726d-4ec5-8bcd-9a6c28c508c8
-        with:
-          args: --severity-threshold=high
+        run: |
+          snyk code test --severity-threshold=high
