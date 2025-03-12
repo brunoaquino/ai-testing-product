@@ -40,12 +40,12 @@ jobs:
 
       - name: Run SonarQube Analysis
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: 6327b63af0d71a5f907d4bbb1106935f055cbc7d
           SONAR_HOST_URL: "https://sonarcloud.io"
         run: |
           mvn clean verify sonar:sonar \
-            -Dsonar.projectKey=SEU_PROJETO \
-            -Dsonar.organization=SEU_ORGANIZACAO \
+            -Dsonar.projectKey=IA_TESTING \
+            -Dsonar.organization=MINHA_ORGANIZACAO \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN
 
