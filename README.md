@@ -9,6 +9,9 @@ Este repositório tem como objetivo testar diferentes IAs para otimizar o desenv
 - **Amazon CodeWhisperer**
 - **Google Gemini**
 - **OpenAI ChatGPT**
+- **Claude Code**
+- **Bolt.new**
+- **OpenHands**
 - **Codium AI, SonarQube, DeepCode** (para análise de código)
 - **GitHub Actions** (para automação de testes)
 
@@ -21,6 +24,9 @@ Este repositório tem como objetivo testar diferentes IAs para otimizar o desenv
  │   ├── codewhisperer/ # Código gerado pelo Amazon CodeWhisperer
  │   ├── gemini/        # Código gerado pelo Google Gemini
  │   ├── chatgpt/       # Código gerado pelo OpenAI ChatGPT
+ │   ├── claude_code/   # Código gerado pelo Claude Code
+ │   ├── bolt_new/      # Código gerado pelo Bolt.new
+ │   ├── openhands/     # Código gerado pelo OpenHands
  ├── 📂 code_review     # Resultados de análise de código
  │   ├── sonarqube/     # Relatórios do SonarQube
  │   ├── deepcode/      # Relatórios do DeepCode
@@ -44,6 +50,9 @@ Este repositório tem como objetivo testar diferentes IAs para otimizar o desenv
    git branch codewhisperer
    git branch gemini
    git branch chatgpt
+   git branch claude_code
+   git branch bolt_new
+   git branch openhands
    ```
 3. **Configurar SonarQube e DeepCode**
    - Criar um arquivo `sonar-project.properties`
@@ -60,3 +69,6 @@ Este repositório tem como objetivo testar diferentes IAs para otimizar o desenv
 ✅ **Qualidade do Código** (avaliada com SonarQube e DeepCode)
 ✅ **Tempo Economizado** com cada IA
 ✅ **Sugestões de Refatoração**
+
+## 📢 Contribuições
+Sinta-se à vontade para contribuir com insights e melhorias no código! 🚀
