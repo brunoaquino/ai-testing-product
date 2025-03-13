@@ -12,6 +12,7 @@ on:
       - claude_code
       - bolt_new
       - openhands
+      - intellj_ai_assist
   pull_request:
     branches:
       - main
