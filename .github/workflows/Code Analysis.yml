@@ -77,7 +77,7 @@ jobs:
           curl -X POST "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=${{ secrets.GEMINI_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d "{
-              \"contents\": [{\"role\": \"user\", \"parts\": [{\"text\": $CODE_CONTENT}]}]
+              \"contents\": [{\"role\": \"user\", \"parts\": [{\"text\": "Revise este código e sugira melhorias: "+$CODE_CONTENT}]}]
             }"
 
       - name: Review Code with ChatGPT
@@ -88,6 +88,6 @@ jobs:
             -H "Content-Type: application/json" \
             -d "{
               \"model\": \"gpt-4\",
-              \"messages\": [{\"role\": \"user\", \"content\": $CODE_CONTENT}]
+              \"messages\": [{\"role\": \"user\", \"content\": "Revise este código e sugira melhorias: " + $CODE_CONTENT}]
             }"
 
