@@ -73,21 +73,21 @@ jobs:
 
       - name: Review Code with Gemini
         run: |
-          CODE_CONTENT=$(find src/main/java/br/com/example -name "*.java" -exec cat {} + | jq -sR .)
+          CODE_CONTENT=$(find src/main/java/br/com/example -name "*.java" -exec cat {} + | jq -sR . | tr -d '\n')
           curl -X POST "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=${{ secrets.GEMINI_API_KEY }}" \
             -H "Content-Type: application/json" \
-            -d '{
+            -d "{
               \"contents\": [{\"role\": \"user\", \"parts\": [{\"text\": $CODE_CONTENT}]}]
-            }'
+            }"
 
       - name: Review Code with ChatGPT
         run: |
-          CODE_CONTENT=$(find src/main/java/br/com/example -name "*.java" -exec cat {} + | jq -sR .)
-          curl -X POST "https://api.openai.com/v1/completions" \
+          CODE_CONTENT=$(find src/main/java/br/com/example -name "*.java" -exec cat {} + | jq -Rs .)
+          curl -X POST "https://api.openai.com/v1/chat/completions" \
             -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d "{
               \"model\": \"gpt-4\",
-              \"messages\": [{\"role\": \"user\", \"content\": \"Revise este código e sugira melhorias: \n\n$CODE_CONTENT\"}]
+              \"messages\": [{\"role\": \"user\", \"content\": $CODE_CONTENT}]
             }"
 
