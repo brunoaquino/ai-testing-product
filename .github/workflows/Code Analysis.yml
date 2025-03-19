@@ -73,7 +73,7 @@ jobs:
 
       - name: Review Code with Gemini
         run: |
-          curl -X POST "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${{ secrets.GEMINI_API_KEY }}" \
+          curl -X POST "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=${{ secrets.GEMINI_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d '{
               "contents": [{"role": "user", "parts": [{"text": "Revise este código e sugira melhorias: $(cat src/main/java/br/com/example/**/*.java)"}]}]
@@ -84,5 +84,5 @@ jobs:
           curl -X POST "https://api.openai.com/v1/completions" \
             -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
             -H "Content-Type: application/json" \
-            -d '{"model": "gpt-4o", "prompt": "Revise este código e sugira melhorias: $(cat src/main/java/br/com/example/**/*.java)"}'
+            -d '{"model": "gpt-4o-mini", "prompt": "Revise este código e sugira melhorias: $(cat src/main/java/br/com/example/**/*.java)"}'
 
