@@ -82,7 +82,7 @@ jobs:
 
       - name: Review Code with ChatGPT
         run: |
-          CODE_CONTENT=$(find src/main/java/br/com/example -name "*.java" -exec cat {} + | jq -Rs .)
+          CODE_CONTENT=$(find src/main/java/br/com/example -name "*.java" -exec cat {} + | jq -sR . | tr -d '\n')
           curl -X POST "https://api.openai.com/v1/chat/completions" \
             -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
             -H "Content-Type: application/json" \
